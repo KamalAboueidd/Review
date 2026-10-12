@@ -1,0 +1,13 @@
+{
+  "name": "ict-grade4-exam",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Grade 4 ICT Interactive Quiz Application",
+  "scripts": {
+    "build": "echo No build step required for static assets",
+    "start": "npx -y serve ."
+  },
+  "keywords": [],
+  "author": "Kamal Abou Eid",
+  "license": "ISC"
+}
