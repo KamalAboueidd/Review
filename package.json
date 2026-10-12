@@ -4,8 +4,8 @@
   "private": true,
   "description": "Grade 4 ICT Interactive Quiz Application",
   "scripts": {
-    "build": "echo No build step required for static assets",
-    "start": "npx -y serve ."
+    "build": "node build.js",
+    "start": "npx -y serve dist"
   },
   "keywords": [],
   "author": "Kamal Abou Eid",
