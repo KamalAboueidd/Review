@@ -59,7 +59,7 @@
   const clearSubmissionsBtn = document.getElementById('clearSubmissionsBtn');
 
   // Storage Keys & Endpoints
-  const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwyLXcWcdsEcK9feZ0rThZRFCBbRTC1yUMEGdyBfeXjBYHT2Q28PtO2DBzBcTiUkenXUQ/exec';
+  const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzswdjOdaICzOqOlKOWTBvkYPeW4tFGMYlX6Hvc5ePUihn9lN9NLAytM6bpgDOaOSkllw/exec';
   const STORAGE_KEY_SCRIPT_URL = 'ict_quiz_google_script_url';
   const STORAGE_KEY_SUBMISSIONS = 'ict_quiz_submissions_history';
   const STORAGE_KEY_ACTIVE_SESSION = 'ict_quiz_active_session';
