@@ -1,223 +1,286 @@
-// ICT Grade 4 - Lessons 1, 2, 3 Questions Data
+// ICT Grade 4 - Lesson 4: Assistive Technology Questions Data
 const QUIZ_QUESTIONS = [
+  // Multiple Choice Questions (1 - 15)
   {
     id: 1,
-    question: "........... is a 3D ground scanner that detects buried metals such as gold:",
+    type: "mcq",
+    question: "A special kind of technology that helps people of determination do difficult tasks is called:",
     options: [
-      "Rover C4",
-      "GPS",
-      "Printer",
-      "Microphone"
+      "Operating System",
+      "Assistive Technology",
+      "Word Processor",
+      "Search Engine"
     ],
-    answer: "Rover C4"
+    answer: "Assistive Technology"
   },
   {
     id: 2,
-    question: "Ground Penetrating Radar (GPR) uses radar to find objects buried:",
+    type: "mcq",
+    question: "Which software enlarges everything on the computer screen, such as words and images?",
     options: [
-      "on screens",
-      "underground",
-      "in space",
-      "on paper"
+      "Screen magnification software",
+      "Antivirus software",
+      "Excel spreadsheet",
+      "PowerPoint presentation"
     ],
-    answer: "underground"
+    answer: "Screen magnification software"
   },
   {
     id: 3,
-    question: "A device that measures the magnetic field to detect underground metals is the:",
+    type: "mcq",
+    question: "People who have trouble hearing can use:",
     options: [
-      "Magnetometer",
-      "Satellite",
-      "Mouse",
-      "Speaker"
+      "Screen zoom",
+      "Paraclimbing tools",
+      "Hearing aids",
+      "Microphone"
     ],
-    answer: "Magnetometer"
+    answer: "Hearing aids"
   },
   {
     id: 4,
-    question: "Global Positioning System (GPS) finds the location of places using:",
+    type: "mcq",
+    question: "Modern hearing aids can connect to mobile devices and be adjusted using:",
     options: [
-      "Satellites",
-      "Magnetometers",
-      "Printers",
-      "Scanners"
+      "Antivirus scanners",
+      "Search boxes",
+      "Cables only",
+      "Mobile apps"
     ],
-    answer: "Satellites"
+    answer: "Mobile apps"
   },
   {
     id: 5,
-    question: "An electronic device that stores, processes, and restores data is the:",
+    type: "mcq",
+    question: "Which assistive technology helps people with speech and language disabilities communicate?",
     options: [
-      "Computer",
-      "Radar",
-      "GPR",
-      "Satellite"
+      "Paraclimbing tools",
+      "Alternate communication software",
+      "Hard disks",
+      "Motherboard cables"
     ],
-    answer: "Computer"
+    answer: "Alternate communication software"
   },
   {
     id: 6,
-    question: "Which component is used to type letters and numbers into a computer:",
+    type: "mcq",
+    question: "Paraclimbing tools allow individuals with ............ to climb mountains:",
     options: [
-      "Keyboard",
-      "Screen",
-      "Speaker",
-      "Printer"
+      "limb differences",
+      "poor hearing",
+      "visual impairment",
+      "speech disabilities"
     ],
-    answer: "Keyboard"
+    answer: "limb differences"
   },
   {
     id: 7,
-    question: "You can select and move objects on the computer screen easily using a:",
+    type: "mcq",
+    question: "Screen magnification software is designed especially for people who are:",
     options: [
-      "Microphone",
-      "Printer",
-      "Mouse",
-      "Satellite"
+      "non-verbal",
+      "hearing impaired",
+      "visually impaired",
+      "unable to walk"
     ],
-    answer: "Mouse"
+    answer: "visually impaired"
   },
   {
     id: 8,
-    question: "Which device is used to enter images and videos into your computer:",
+    type: "mcq",
+    question: "Software that can turn text into speech and speech into text is an example of:",
     options: [
-      "Speaker",
-      "Monitor",
-      "Camera",
-      "Magnetometer"
+      "Operating systems",
+      "Alternate communication software",
+      "Screen magnifiers",
+      "Antivirus programs"
     ],
-    answer: "Camera"
+    answer: "Alternate communication software"
   },
   {
     id: 9,
-    question: "We use a ............ in video chat programs to input sound and voice:",
+    type: "mcq",
+    question: "Which of the following is considered an extraordinary activity supported by assistive technology?",
     options: [
-      "Screen",
-      "Printer",
-      "Rover C4",
-      "Microphone",
+      "Typing on a keyboard",
+      "Mountain climbing (Paraclimbing)",
+      "Browsing websites",
+      "Saving a document"
     ],
-    answer: "Microphone"
+    answer: "Mountain climbing (Paraclimbing)"
   },
   {
     id: 10,
-    question: "Which device displays visual information like texts, images, and videos:",
+    type: "mcq",
+    question: "Assistive technology helps people of determination with:",
     options: [
-      "Microphone",
-      "Screen",
-      "Mouse",
-      "Keyboard"
+      "Ordinary and extraordinary activities",
+      "Causing computer errors",
+      "Creating harmful viruses",
+      "Deleting important files"
     ],
-    answer: "Screen"
+    answer: "Ordinary and extraordinary activities"
   },
   {
     id: 11,
-    question: "Audio and sound results are output from the computer through:",
+    type: "mcq",
+    question: "People of determination with visual difficulties can use the computer screen easily thanks to:",
     options: [
-      "Keyboard",
-      "Camera",
+      "Hearing aids",
       "Speakers",
-      "Scanner"
+      "Screen enlargement software",
+      "Microphones"
     ],
-    answer: "Speakers"
+    answer: "Screen enlargement software"
   },
   {
     id: 12,
-    question: "Which device outputs computer texts and images directly onto paper:",
+    type: "mcq",
+    question: "Who can benefit from alternate communication software?",
     options: [
-      "Microphone",
-      "CPU",
-      "GPR",
-      "Printer",
+      "People with normal speech",
+      "People with limb differences",
+      "People who can't hear high pitches",
+      "People with speech and language disabilities"
     ],
-    answer: "Printer"
+    answer: "People with speech and language disabilities"
   },
   {
     id: 13,
-    question: "A device that allows blind people to read and use computers is the:",
+    type: "mcq",
+    question: "Paraclimbing tools are classified as:",
     options: [
-      "Camera",
-      "Mouse",
-      "Braille terminal",
-      "Screen"
+      "Sporting tools for assistive technology",
+      "Digital software programs",
+      "Computer operating systems",
+      "Storage components"
     ],
-    answer: "Braille terminal"
+    answer: "Sporting tools for assistive technology"
   },
   {
     id: 14,
-    question: "A speech synthesizer helps non-verbal people communicate by changing:",
+    type: "mcq",
+    question: "All of the following are examples of assistive technology EXCEPT:",
     options: [
-      "voice to paper",
-      "pictures to 3D",
-      "text to speech",
-      "video to sound"
+      "Hearing aids",
+      "Screen magnification software",
+      "Computer viruses",
+      "Paraclimbing tools"
     ],
-    answer: "text to speech"
+    answer: "Computer viruses"
   },
   {
     id: 15,
-    question: "Which component works as both an input device and an output device:",
+    type: "mcq",
+    question: "Modern medical hearing aids can be directly controlled and adjusted through:",
     options: [
-      "Keyboard",
-      "Speakers",
-      "Touch screen",
-      "Printer"
+      "A printer cable",
+      "A smartphone app",
+      "A mouse clicker",
+      "Microsoft Word"
     ],
-    answer: "Touch screen"
+    answer: "A smartphone app"
   },
+
+  // True / False Questions (16 - 25)
   {
     id: 16,
-    question: "Programs like Microsoft Word and PowerPoint are examples of:",
+    type: "tf",
+    question: "Assistive technology allows people of determination to perform tasks they find difficult.",
     options: [
-      "Hardware",
-      "Software",
-      "Satellites",
-      "Radars"
+      "True",
+      "False"
     ],
-    answer: "Software"
+    answer: "True"
   },
   {
     id: 17,
-    "question": "Which of the following is an example of an operating system (OS):",
+    type: "tf",
+    question: "Screen magnification software is designed to assist deaf people to hear better.",
     options: [
-      "MS Word",
-      "MS Excel",
-      "Windows",
-      "Camera"
+      "True",
+      "False"
     ],
-    answer: "Windows"
+    answer: "False"
   },
   {
     id: 18,
-    question: "CPU stands for:",
+    type: "tf",
+    question: "Modern hearing aids can be connected to mobile phones via apps.",
     options: [
-      "Control Print Unit",
-      "Central Processing Unit",
-      "Computer Power Unit",
-      "Central Phone User"
+      "True",
+      "False"
     ],
-    answer: "Central Processing Unit"
+    answer: "True"
   },
   {
     id: 19,
-    question: "The main role of the CPU is to ............ data:",
+    type: "tf",
+    question: "Hearing aids help people who suffer from poor vision.",
     options: [
-      "Print",
-      "Process",
-      "Delete",
-      "Break"
+      "True",
+      "False"
     ],
-    answer: "Process"
+    answer: "False"
   },
   {
     id: 20,
-    question: "Which of the following is a popular mobile operating system:",
+    type: "tf",
+    question: "Alternate communication software can turn text into speech and speech into text.",
     options: [
-      "MS Word",
-      "PowerPoint",
-      "Printer",
-      "Android"
+      "True",
+      "False"
     ],
-    answer: "Android"
+    answer: "True"
+  },
+  {
+    id: 21,
+    type: "tf",
+    question: "Paraclimbing tools are used to help people with poor eyesight read texts.",
+    options: [
+      "True",
+      "False"
+    ],
+    answer: "False"
+  },
+  {
+    id: 22,
+    type: "tf",
+    question: "Screen magnification software enlarges words and images on the computer screen.",
+    options: [
+      "True",
+      "False"
+    ],
+    answer: "True"
+  },
+  {
+    id: 23,
+    type: "tf",
+    question: "Assistive technology can only help people with daily ordinary tasks, not sports or extraordinary activities.",
+    options: [
+      "True",
+      "False"
+    ],
+    answer: "False"
+  },
+  {
+    id: 24,
+    type: "tf",
+    question: "Alternate communication software helps people with speech and language disabilities communicate with others.",
+    options: [
+      "True",
+      "False"
+    ],
+    answer: "True"
+  },
+  {
+    id: 25,
+    type: "tf",
+    question: "Hearing aids are classified as paraclimbing sporting equipment.",
+    options: [
+      "True",
+      "False"
+    ],
+    answer: "False"
   }
 ];

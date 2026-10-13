@@ -34,11 +34,13 @@
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const answerSelectedHint = document.getElementById('answerSelectedHint');
+  const toastContainer = document.getElementById('toastContainer');
 
   // DOM Elements - Results Stage
   const resultGreeting = document.getElementById('resultGreeting');
   const resultStudentName = document.getElementById('resultStudentName');
   const finalScoreNum = document.getElementById('finalScoreNum');
+  const maxScoreNum = document.getElementById('maxScoreNum');
   const scorePercentagePill = document.getElementById('scorePercentagePill');
   const scoreGradeMessage = document.getElementById('scoreGradeMessage');
   const syncStatusAlert = document.getElementById('syncStatusAlert');
@@ -156,6 +158,9 @@
   // Initialize
   function init() {
     totalQuestionsNum.textContent = QUIZ_QUESTIONS.length;
+    if (maxScoreNum) {
+      maxScoreNum.textContent = QUIZ_QUESTIONS.length;
+    }
     
     // Load configured Google Apps Script URL with Kamal's endpoint as default
     const savedUrl = localStorage.getItem(STORAGE_KEY_SCRIPT_URL) || DEFAULT_SCRIPT_URL;
@@ -273,13 +278,100 @@
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
+  // Toast & Audio System for Bravo Notifications
+  let activeToastTimeout = null;
+
+  function showBravoToast(studentName) {
+    if (!toastContainer) return;
+
+    if (activeToastTimeout) {
+      clearTimeout(activeToastTimeout);
+      activeToastTimeout = null;
+    }
+
+    toastContainer.innerHTML = '';
+
+    const toast = document.createElement('div');
+    toast.className = 'bravo-toast';
+
+    const safeName = escapeHtml(studentName || 'يا بطل');
+    const isFemale = isFemaleName(studentName);
+    const cheer = isFemale ? 'برافو يا' : 'برافو يا';
+    const subText = isFemale ? 'إجابة صحيحة وممتازة! ✨' : 'إجابة صحيحة وممتاز! ✨';
+
+    toast.innerHTML = `
+      <div class="bravo-toast-icon">👏</div>
+      <div class="bravo-toast-content">
+        <div class="bravo-toast-title">${cheer} <span class="bravo-name">${safeName}</span> 🎉</div>
+        <div class="bravo-toast-subtitle">${subText}</div>
+      </div>
+    `;
+
+    toastContainer.appendChild(toast);
+
+    activeToastTimeout = setTimeout(() => {
+      toast.classList.add('toast-hide');
+      setTimeout(() => {
+        if (toast.parentNode) {
+          toast.parentNode.removeChild(toast);
+        }
+      }, 350);
+    }, 2000);
+  }
+
+  function playSuccessSound() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+      const now = ctx.currentTime;
+      // Tone 1 (G5)
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(783.99, now);
+      gain1.gain.setValueAtTime(0.12, now);
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.16);
+
+      // Tone 2 (C6)
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(1046.50, now + 0.1);
+      gain2.gain.setValueAtTime(0.14, now + 0.1);
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.start(now + 0.1);
+      osc2.stop(now + 0.32);
+    } catch (e) {
+      // Audio autoplay policy fallback
+    }
+  }
+
   // Render Question
   function renderQuestion(index) {
     const qData = QUIZ_QUESTIONS[index];
     if (!qData) return;
 
     currentQuestionNum.textContent = index + 1;
-    questionTag.textContent = `Question ${index + 1} of ${QUIZ_QUESTIONS.length}`;
+    const isTF = qData.type === 'tf';
+
+    if (isTF) {
+      questionTag.textContent = `Question ${index + 1} of ${QUIZ_QUESTIONS.length} • True or False (صح أو خطأ)`;
+      optionsContainer.classList.add('tf-grid');
+    } else {
+      questionTag.textContent = `Question ${index + 1} of ${QUIZ_QUESTIONS.length} • Multiple Choice (اختيار من متعدد)`;
+      optionsContainer.classList.remove('tf-grid');
+    }
+
     questionText.textContent = qData.question;
 
     // Progress Bar
@@ -299,8 +391,13 @@
         btn.classList.add('selected');
       }
 
+      let keyBadge = letters[optIdx] || (optIdx + 1);
+      if (isTF) {
+        keyBadge = optText.toLowerCase() === 'true' ? '✓' : '✗';
+      }
+
       btn.innerHTML = `
-        <span class="option-key">${letters[optIdx] || optIdx + 1}</span>
+        <span class="option-key">${keyBadge}</span>
         <span class="option-text">${escapeHtml(optText)}</span>
       `;
 
@@ -316,7 +413,7 @@
 
     if (index === QUIZ_QUESTIONS.length - 1) {
       nextBtn.innerHTML = `
-        <span>إنهاء وتسليم الاختبار</span>
+        <span>إنهاء وتسليم الواجب</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
@@ -340,6 +437,7 @@
 
   // Select Option
   function selectOption(qId, selectedOption) {
+    const qData = QUIZ_QUESTIONS.find(q => q.id === qId) || QUIZ_QUESTIONS[currentQuestionIndex];
     userAnswers[qId] = selectedOption;
     saveActiveSession();
     
@@ -356,15 +454,21 @@
 
     answerSelectedHint.textContent = 'تم اختيار إجابة ✓';
 
+    // Check if the answer is correct -> show toast with student's name & sound
+    const isCorrect = String(selectedOption).trim().toLowerCase() === String(qData.answer).trim().toLowerCase();
+    if (isCorrect) {
+      showBravoToast(currentStudentName);
+      playSuccessSound();
+    }
+
     // Auto-advance if wanted, or student clicks Next for confirmation
-    // Giving 250ms for visual feedback before auto next if not on the last question
     if (currentQuestionIndex < QUIZ_QUESTIONS.length - 1) {
       setTimeout(() => {
         // Only advance if still on the same question
         if (currentQuestionIndex < QUIZ_QUESTIONS.length - 1 && userAnswers[qId] === selectedOption) {
           handleNextQuestion();
         }
-      }, 280);
+      }, 550);
     }
   }
 
@@ -410,7 +514,7 @@
 
     QUIZ_QUESTIONS.forEach((q) => {
       const studentAns = userAnswers[q.id] || 'لم تجب';
-      const isCorrect = studentAns.trim() === q.answer.trim();
+      const isCorrect = String(studentAns).trim().toLowerCase() === String(q.answer).trim().toLowerCase();
       if (isCorrect) {
         score++;
       }
@@ -447,21 +551,24 @@
     }
 
     finalScoreNum.textContent = score;
+    if (maxScoreNum) {
+      maxScoreNum.textContent = total;
+    }
     scorePercentagePill.textContent = `${percentage}%`;
 
     // Feedback message
     if (percentage >= 85) {
       scoreGradeMessage.textContent = isFemale
-        ? 'ممتازة جداً يا بطلة! أداء رائع ودرجة مشرفة.'
-        : 'ممتاز جداً يا بطل! أداء رائع ودرجة مشرفة.';
+        ? 'ممتازة جداً يا بطلة! أداء رائع ودرجة مشرفة في واجب Lesson 4 (Assistive Technology).'
+        : 'ممتاز جداً يا بطل! أداء رائع ودرجة مشرفة في واجب Lesson 4 (Assistive Technology).';
     } else if (percentage >= 65) {
       scoreGradeMessage.textContent = isFemale
         ? 'جيدة جداً! راجعي الأسئلة التي أخطأتِ بها للوصول للدرجة النهائية.'
         : 'جيد جداً! راجع الأسئلة التي أخطأت بها للوصول للدرجة النهائية.';
     } else {
       scoreGradeMessage.textContent = isFemale
-        ? 'أحسنتِ المحاولة! راجعي دروس ICT 1 و 2 و 3 وأعيدي المحاولة مرة أخرى.'
-        : 'أحسنت المحاولة! راجع دروس ICT 1 و 2 و 3 وأعد المحاولة مرة أخرى.';
+        ? 'أحسنتِ المحاولة! راجعي درس Assistive Technology (Lesson 4) وأعيدي المحاولة مرة أخرى.'
+        : 'أحسنت المحاولة! راجع درس Assistive Technology (Lesson 4) وأعد المحاولة مرة أخرى.';
     }
 
     // Populate Review Breakdown
@@ -602,7 +709,7 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.setAttribute('href', url);
-      link.setAttribute('download', `ICT_Grade4_Quiz_Results_${Date.now()}.csv`);
+      link.setAttribute('download', `ICT_Grade4_Lesson4_Homework_Results_${Date.now()}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

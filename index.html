@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="اختبار مادة تكنولوجيا المعلومات والاتصالات ICT - الصف الرابع الابتدائي (Lessons 1, 2, 3)">
-  <title>ICT Grade 4 Quiz | اختبار تكنولوجيا المعلومات</title>
+  <meta name="description" content="واجب مادة تكنولوجيا المعلومات والاتصالات ICT - الصف الرابع الابتدائي (Lesson 4: Assistive Technology)">
+  <title>Homework Lesson 4 | Grade 4 ICT</title>
   
   <!-- Modern Clean Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,15 +14,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Toast Notification Container for Bravo Messages -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
   <div class="app-container">
     
     <!-- Header -->
     <header class="app-header">
       <div class="header-content">
         <div class="brand">
-          <span class="badge">Grade 4 ICT</span>
-          <h1 class="main-title">ICT Revision Quiz</h1>
-          <p class="subtitle">Theme 1: Lessons 1, 2, 3 (20 Questions)</p>
+          <span class="badge">Grade 4 ICT • Homework</span>
+          <h1 class="main-title">Homework Lesson 4</h1>
+          <p class="subtitle">Theme 1: Assistive Technology (25 Questions)</p>
         </div>
         <button id="configBtn" class="icon-btn hidden" style="display: none;" title="إعدادات الرابط للمعلم" aria-label="Settings">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -45,8 +48,8 @@
               <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
             </svg>
           </div>
-          <h2 class="welcome-heading" >مرحباً بك في اختبار تكنولوجيا المعلومات الخاص بمستر كمال</h2>
-          <p class="welcome-desc">جاهز تختبر معلوماتك؟ جاوب على الـ 20 سؤال ودرجتك هتتسجل تلقائياً عند المستر.</p>
+          <h2 class="welcome-heading">Homework Lesson 4</h2>
+          <p class="welcome-desc">واجب درس Assistive Technology الخاص بمستر كمال. جاوب على الـ 25 سؤال ودرجتك هتتسجل تلقائياً عند المستر.</p>
           
           <form id="startForm" class="name-form" onsubmit="return false;">
             <div class="input-group">
@@ -60,13 +63,13 @@
                 required
                 autofocus
               >
-              <span id="nameError" class="error-msg">برجاء كتابة اسمك للبدء في الامتحان.</span>
+              <span id="nameError" class="error-msg">برجاء كتابة اسمك للبدء في حل الواجب.</span>
             </div>
             
             <div class="rules-summary">
               <div class="rule-item">
                 <span class="rule-dot">•</span>
-                <span>الامتحان مكون من 20 سؤال اختياري (MCQ).</span>
+                <span>الواجب مكون من 25 سؤال (15 اختيار من متعدد + 10 صح أو خطأ).</span>
               </div>
               <div class="rule-item">
                 <span class="rule-dot">•</span>
@@ -79,7 +82,7 @@
             </div>
 
             <button type="button" id="startQuizBtn" class="primary-btn full-width">
-              <span>ابدأ الاختبار الآن</span>
+              <span>ابدأ حل الواجب الآن</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"></path>
                 <path d="m12 5 7 7-7 7"></path>
@@ -166,7 +169,7 @@
               <div class="score-fraction">
                 <span id="finalScoreNum" class="big-score">0</span>
                 <span class="score-divider">/</span>
-                <span class="max-score">20</span>
+                <span id="maxScoreNum" class="max-score">25</span>
               </div>
               <div class="score-percentage-pill" id="scorePercentagePill">0%</div>
             </div>
@@ -189,7 +192,7 @@
               <span>مراجعة الإجابات والحل النموذجي</span>
             </button>
             <button id="retakeQuizBtn" class="outline-btn full-width">
-              <span>إعادة الاختبار</span>
+              <span>إعادة حل الواجب</span>
             </button>
           </div>
 
@@ -248,7 +251,7 @@
 
     <!-- Minimal Clean Footer -->
     <footer class="app-footer">
-      <p>Grade 4 ICT • Simple & focus on questions</p>
+      <p>Grade 4 ICT • Homework Lesson 4 • Mr. Kamal Abou Eid</p>
     </footer>
 
   </div>

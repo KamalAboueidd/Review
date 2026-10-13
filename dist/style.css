@@ -810,3 +810,126 @@ body {
     font-size: 2rem;
   }
 }
+
+/* ==========================================================================
+   Bravo Toast Notification System
+   Drops down from top whenever student answers correctly
+   ========================================================================== */
+
+.toast-container {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 92%;
+  max-width: 440px;
+}
+
+.bravo-toast {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #000000;
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: 999px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.15);
+  border: 2px solid #10b981;
+  animation: bravoSlideDown 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-family: var(--font-arabic);
+  direction: rtl;
+}
+
+.bravo-toast.toast-hide {
+  opacity: 0;
+  transform: translateY(-24px) scale(0.95);
+}
+
+@keyframes bravoSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.bravo-toast-icon {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  animation: bravoWiggle 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes bravoWiggle {
+  0% { transform: rotate(-8deg) scale(1); }
+  100% { transform: rotate(8deg) scale(1.15); }
+}
+
+.bravo-toast-content {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.bravo-toast-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.bravo-toast-title .bravo-name {
+  color: #34d399;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bravo-toast-subtitle {
+  font-size: 0.82rem;
+  color: #a7f3d0;
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+/* True / False Specific Grid */
+.options-grid.tf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.options-grid.tf-grid .option-btn {
+  justify-content: center;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 500px) {
+  .options-grid.tf-grid {
+    grid-template-columns: 1fr;
+  }
+  .bravo-toast {
+    padding: 10px 18px;
+    gap: 10px;
+  }
+  .bravo-toast-title {
+    font-size: 0.95rem;
+  }
+  .bravo-toast-subtitle {
+    font-size: 0.76rem;
+  }
+}
+
